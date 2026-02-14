@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Sona Moni 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Atma:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Atma', cursive;
+}
+
+body{
+height:100vh;
+overflow:hidden;
+background: radial-gradient(circle at top, #1e1e3f, #0a0a1f 70%);
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+color:white;
+text-align:center;
+position:relative;
+}
+
+/* subtle stars */
+body::before{
+content:"";
+position:absolute;
+inset:0;
+background:url("https://www.transparenttextures.com/patterns/stardust.png");
+opacity:0.4;
+animation:twinkle 8s infinite alternate;
+}
+
+@keyframes twinkle{
+from{opacity:0.3;}
+to{opacity:0.6;}
+}
+
+.subtitle{
+position:absolute;
+bottom:18%;
+font-size:clamp(20px,4vw,36px);
+max-width:90%;
+line-height:1.5;
+opacity:0;
+transition:opacity 0.8s ease;
+}
+
+.question-box{
+position:absolute;
+top:38%;
+display:none;
+flex-direction:column;
+align-items:center;
+gap:25px;
+}
+
+.question{
+font-size:clamp(26px,5vw,42px);
+font-weight:700;
+}
+
+.buttons{
+display:flex;
+gap:20px;
+position:relative;
+}
+
+button{
+padding:12px 30px;
+font-size:20px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.yes{
+background:#ff4d88;
+color:white;
+box-shadow:0 0 20px #ff4d88;
+}
+
+.yes:hover{
+transform:scale(1.1);
+}
+
+.no{
+background:#444;
+color:white;
+position:absolute;
+}
+
+.love-message{
+position:absolute;
+font-size:clamp(24px,5vw,40px);
+display:none;
+animation:fade 2s ease forwards;
+}
+
+@keyframes fade{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+/* floating hearts */
+.heart{
+position:absolute;
+color:#ff4d88;
+animation:floatUp 6s linear infinite;
+}
+
+@keyframes floatUp{
+from{transform:translateY(100vh); opacity:1;}
+to{transform:translateY(-10vh); opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="song" src="song.mp3"></audio>
+
+<div class="subtitle" id="subtitle"></div>
+
+<div class="question-box" id="questionBox">
+<div class="question">
+ওরে আমার সোনা মনি বল না, "ভালোবাসি" 🌝
+</div>
+
+<div class="buttons">
+<button class="yes" onclick="yesClicked()">হ্যাঁ</button>
+<button class="no" id="noBtn">না</button>
+</div>
+</div>
+
+<div class="love-message" id="loveMessage">
+আমিও তোমাকে অসীম ভালোবাসি 💖✨<br>
+দূরত্ব শুধু মানচিত্রে... মনে নয় 🌙
+</div>
+
+<script>
+
+const audio=document.getElementById("song");
+const subtitle=document.getElementById("subtitle");
+const questionBox=document.getElementById("questionBox");
+const noBtn=document.getElementById("noBtn");
+
+audio.currentTime=15;
+
+document.body.addEventListener("click",()=>{
+audio.play();
+},{once:true});
+
+audio.addEventListener("timeupdate",()=>{
+let t=audio.currentTime;
+
+if(t>=25&&t<33){
+show(`বাঁকা ঠোঁটের মুচকি হাসি<br>
+কুন্ডলীতে ম্যাচিং রাশি<br>
+তাইতো আমি তোরই কাছে<br>
+বারে বারে আসি।`);
+}
+else if(t>=33&&t<41){
+show(`মাইরি বলছি,<br>
+বাঁকা ঠোটের মুচকি হাসি<br>
+কুন্ডলীতে ম্যাচিং রাশি<br>
+তাইতো আমি তোরই কাছে বারে বারে আসি।`);
+}
+else if(t>=41&&t<50){
+show(`যখনই হয় মন উদাসী<br>
+গেয়ে উঠি ভীম পলাশী।<br>
+ঘুটঘুটে এই প্রেমপুরিতে<br>
+জ্বালিয়ে দে না বাতি।`);
+}
+else if(t>=50&&t<60){
+show(`মিথ্যে হলে বলেই দে না, "তোকে ভালোবাসি"`);
+}
+else if(t>=60&&t<68){
+show(`ওরে আমার সোনা মনি বল না, "ভালোবাসি"`);
+}
+else if(t>=68&&t<75){
+show(`মুচকি হেসে বলেই দে না, "তোকে ভালোবাসি"`);
+}
+else if(t>=75&&t<78){
+subtitle.style.opacity=0;
+questionBox.style.display="flex";
+}
+else if(t>=78){
+audio.pause();
+}
+});
+
+function show(text){
+subtitle.innerHTML=text;
+subtitle.style.opacity=1;
+}
+
+function yesClicked(){
+questionBox.style.display="none";
+document.getElementById("loveMessage").style.display="block";
+createHearts();
+}
+
+noBtn.addEventListener("mouseover",moveButton);
+noBtn.addEventListener("touchstart",moveButton);
+
+function moveButton(){
+let maxX=window.innerWidth-noBtn.offsetWidth;
+let maxY=window.innerHeight-noBtn.offsetHeight;
+noBtn.style.left=Math.random()*maxX+"px";
+noBtn.style.top=Math.random()*maxY+"px";
+}
+
+function createHearts(){
+for(let i=0;i<20;i++){
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="💖";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(20+Math.random()*30)+"px";
+heart.style.animationDuration=(4+Math.random()*4)+"s";
+document.body.appendChild(heart);
+}
+}
+
+</script>
+
+</body>
+</html>
