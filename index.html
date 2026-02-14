@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For My Love 💖</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Atma:wght@700&display=swap" rel="stylesheet">
 
 <style>
@@ -18,23 +17,22 @@ color:white;
 display:flex;
 justify-content:center;
 align-items:center;
-flex-direction:column;
 text-align:center;
-transition:background 1.5s ease;
+transition:1s;
 }
 
-/* ---------------- LOADER ---------------- */
+/* -------- LOADER -------- */
 
 #loader{
 position:fixed;
 inset:0;
-background:radial-gradient(circle at top,#1e1e3f,#0a0a1f 70%);
+background:#0a0a1f;
 display:flex;
+flex-direction:column;
 justify-content:center;
 align-items:center;
-flex-direction:column;
-z-index:9999;
-transition:opacity 1s ease;
+z-index:999;
+transition:opacity 1s;
 }
 
 .loader-heart{
@@ -48,43 +46,122 @@ animation:pulse 1.5s infinite;
 100%{transform:scale(1);}
 }
 
-#loader p{
-margin-top:20px;
-font-size:20px;
+/* -------- MAIN CONTENT -------- */
+
+#mainContent{
+display:none;
+flex-direction:column;
+align-items:center;
+gap:30px;
+position:relative;
 }
 
-/* ---------------- SUBTITLE ---------------- */
+/* IMAGE */
 
-.subtitle{
-position:absolute;
-top:50%;
-transform:translateY(-50%);
-font-size:clamp(32px,7vw,65px);
-font-weight:bold;
-max-width:90%;
-opacity:0;
-transition:opacity 0.8s ease;
-text-shadow:0 0 20px #ff4d88;
-}
-
-/* ---------------- SLIDESHOW ---------------- */
-
-.image-slide{
-position:absolute;
-bottom:5%;
+.image-box{
 width:260px;
 height:320px;
 border-radius:20px;
 overflow:hidden;
-box-shadow:0 0 25px rgba(255,77,136,0.7);
-display:none;
+box-shadow:0 0 25px rgba(255,77,136,0.6);
 animation:fadeIn 1s ease;
 }
 
-.image-slide img{
+.image-box img{
 width:100%;
 height:100%;
 object-fit:cover;
+}
+
+/* SUBTITLE */
+
+.subtitle{
+font-size:clamp(24px,5vw,45px);
+font-weight:bold;
+max-width:90%;
+opacity:0;
+transition:opacity 0.8s;
+text-shadow:0 0 15px #ff4d88;
+}
+
+/* QUESTION */
+
+#questionBox{
+display:none;
+flex-direction:column;
+gap:30px;
+align-items:center;
+opacity:0;
+transition:opacity 0.8s;
+}
+
+.buttons{
+display:flex;
+gap:60px;
+position:relative;
+}
+
+button{
+padding:14px 40px;
+font-size:20px;
+border:none;
+border-radius:40px;
+cursor:pointer;
+}
+
+.yes{
+background:#ff4d88;
+color:white;
+box-shadow:0 0 15px #ff4d88;
+}
+
+.no{
+background:#444;
+color:white;
+position:absolute;
+transition:all 0.5s ease;
+}
+
+#nextBtn{
+display:none;
+margin-top:20px;
+background:#ff4d88;
+color:white;
+}
+
+/* -------- BEACH PAGE -------- */
+
+#beachPage{
+display:none;
+position:fixed;
+inset:0;
+background:url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e") center/cover no-repeat;
+}
+
+.overlay{
+background:rgba(0,0,0,0.45);
+height:100%;
+overflow:auto;
+padding:40px 20px;
+}
+
+.collage{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:25px;
+}
+
+.collage img{
+width:100%;
+border-radius:20px;
+padding:8px;
+background:white;
+box-shadow:0 10px 20px rgba(0,0,0,0.5);
+transition:transform 0.4s;
+}
+
+.collage img:hover{
+transform:scale(1.05);
 }
 
 @keyframes fadeIn{
@@ -92,118 +169,6 @@ from{opacity:0;}
 to{opacity:1;}
 }
 
-/* ---------------- QUESTION ---------------- */
-
-.question-box{
-display:none;
-flex-direction:column;
-gap:30px;
-align-items:center;
-}
-
-.buttons{
-display:flex;
-gap:80px;
-margin-top:20px;
-position:relative;
-}
-
-button{
-padding:15px 45px;
-font-size:22px;
-border:none;
-border-radius:40px;
-cursor:pointer;
-transition:0.4s;
-}
-
-.yes{
-background:#ff4d88;
-color:white;
-box-shadow:0 0 20px #ff4d88;
-}
-
-.yes:hover{transform:scale(1.1);}
-
-.no{
-background:#444;
-color:white;
-position:relative;
-}
-
-/* ---------------- NEXT BUTTON ---------------- */
-
-.next-btn{
-display:none;
-margin-top:40px;
-background:#ff4d88;
-color:white;
-}
-
-/* ---------------- COLLAGE PAGE ---------------- */
-
-#collagePage{
-display:none;
-position:fixed;
-inset:0;
-overflow:auto;
-padding:40px 20px;
-background:url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e") center/cover no-repeat;
-}
-
-.collage-overlay{
-background:rgba(0,0,0,0.45);
-min-height:100vh;
-padding:40px 20px;
-}
-
-.collage-title{
-font-size:clamp(28px,5vw,45px);
-margin-bottom:30px;
-}
-
-.collage-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:25px;
-}
-
-.collage-grid img{
-width:100%;
-border-radius:20px;
-padding:10px;
-background:white;
-box-shadow:0 10px 25px rgba(0,0,0,0.5);
-transition:transform 0.4s;
-}
-
-.collage-grid img:hover{
-transform:scale(1.05);
-}
-
-/* ---------------- FLOATING HEARTS ---------------- */
-
-.heart-bg{
-position:absolute;
-color:#ff4d88;
-animation:floatUp 8s linear infinite;
-}
-
-@keyframes floatUp{
-from{transform:translateY(100vh);opacity:1;}
-to{transform:translateY(-10vh);opacity:0;}
-}
-
-#startBtn{
-display:none;
-padding:15px 35px;
-font-size:22px;
-background:#ff4d88;
-color:white;
-border:none;
-border-radius:40px;
-cursor:pointer;
-}
 </style>
 </head>
 
@@ -214,32 +179,35 @@ cursor:pointer;
 <p>Preparing something magical...</p>
 </div>
 
+<div id="mainContent">
+
 <button id="startBtn">Tap to Start 💖</button>
 
-<audio id="song" src="song.mp3"></audio>
-<audio id="song2" src="song2.mp3"></audio>
-
-<div class="subtitle" id="subtitle"></div>
-
-<div class="image-slide" id="imageBox">
+<div class="image-box" id="imageBox" style="display:none;">
 <img id="slideImg" src="">
 </div>
 
-<div class="question-box" id="questionBox">
-<div style="font-size:clamp(30px,6vw,55px);">
+<div class="subtitle" id="subtitle"></div>
+
+<div id="questionBox">
+<div style="font-size:clamp(26px,5vw,40px);">
 ওরে আমার সোনা মনি বল না, "ভালোবাসি" 🌝
 </div>
+
 <div class="buttons">
 <button class="yes" onclick="yesClicked()">হ্যাঁ</button>
 <button class="no" id="noBtn">না</button>
 </div>
-<button class="next-btn" id="nextBtn">Next ❤️</button>
+
+<button id="nextBtn">Next ❤️</button>
 </div>
 
-<div id="collagePage">
-<div class="collage-overlay">
-<h1 class="collage-title">Our Beautiful Memories 💕</h1>
-<div class="collage-grid">
+</div>
+
+<div id="beachPage">
+<div class="overlay">
+<h1 style="margin-bottom:30px;">Our Beautiful Memories 💕</h1>
+<div class="collage">
 <img src="image1.jpg">
 <img src="image2.jpg">
 <img src="image3.jpg">
@@ -249,64 +217,61 @@ cursor:pointer;
 </div>
 </div>
 
+<audio id="song" src="song.mp3"></audio>
+<audio id="song2" src="song2.mp3"></audio>
+
 <script>
 
-/* ---------- LOADER ---------- */
+/* -------- LOADER -------- */
 
-const loader=document.getElementById("loader");
 window.onload=()=>{
 setTimeout(()=>{
-loader.style.opacity="0";
+document.getElementById("loader").style.opacity="0";
 setTimeout(()=>{
-loader.style.display="none";
-document.getElementById("startBtn").style.display="block";
+document.getElementById("loader").style.display="none";
+document.getElementById("mainContent").style.display="flex";
 },1000);
 },1500);
 };
 
-/* ---------- MAIN LOGIC ---------- */
-
-const startBtn=document.getElementById("startBtn");
 const audio=document.getElementById("song");
 const subtitle=document.getElementById("subtitle");
-const questionBox=document.getElementById("questionBox");
-const noBtn=document.getElementById("noBtn");
 const imageBox=document.getElementById("imageBox");
 const slideImg=document.getElementById("slideImg");
+const questionBox=document.getElementById("questionBox");
+const noBtn=document.getElementById("noBtn");
 const nextBtn=document.getElementById("nextBtn");
-const collagePage=document.getElementById("collagePage");
+const beachPage=document.getElementById("beachPage");
 const song2=document.getElementById("song2");
 
 const images=["image1.jpg","image2.jpg","image3.jpg","image4.jpg","image5.jpg"];
 let imgIndex=0;
 
-startBtn.onclick=function(){
-startBtn.style.display="none";
+/* START */
+
+document.getElementById("startBtn").onclick=function(){
+this.style.display="none";
+imageBox.style.display="block";
 audio.play();
 };
 
-/* Subtitle timing (adjust slightly if needed) */
+/* SUBTITLE TIMING */
 
 audio.addEventListener("timeupdate",()=>{
 let t=audio.currentTime;
 
-if(t>=5 && t<15){
-show("বাঁকা ঠোঁটের মুচকি হাসি...");
+if(t>=5 && t<18){
+show("বাঁকা ঠোঁটের মুচকি হাসি<br>কুন্ডলীতে ম্যাচিং রাশি");
 showImage();
 }
-else if(t>=15 && t<25){
-show("মাইরি বলছি...");
+else if(t>=18 && t<35){
+show("তাইতো আমি তোরই কাছে<br>বারে বারে আসি");
 }
-else if(t>=25 && t<38){
-show("যখনই হয় মন উদাসী...");
-}
-else if(t>=38 && t<55){
-show('মিথ্যে হলে বলেই দে না, "তোকে ভালোবাসি"');
+else if(t>=35 && t<55){
+show('মিথ্যে হলে বলেই দে না<br>"তোকে ভালোবাসি"');
 }
 else if(t>=55){
-subtitle.style.opacity=0;
-questionBox.style.display="flex";
-audio.pause();
+fadeOutSong();
 }
 });
 
@@ -316,10 +281,42 @@ subtitle.style.opacity=1;
 }
 
 function showImage(){
-imageBox.style.display="block";
 slideImg.src=images[imgIndex];
 imgIndex=(imgIndex+1)%images.length;
 }
+
+/* Smooth fade out instead of sudden stop */
+
+function fadeOutSong(){
+let fade=setInterval(()=>{
+if(audio.volume>0.05){
+audio.volume-=0.05;
+}else{
+clearInterval(fade);
+audio.pause();
+subtitle.style.opacity=0;
+showQuestion();
+}
+},100);
+}
+
+/* QUESTION ANIMATION */
+
+function showQuestion(){
+questionBox.style.display="flex";
+setTimeout(()=>{
+questionBox.style.opacity=1;
+},100);
+}
+
+/* NO BUTTON smooth movement */
+
+noBtn.addEventListener("mouseenter",()=>{
+let x=Math.random()*(window.innerWidth-150);
+let y=Math.random()*(window.innerHeight-150);
+noBtn.style.left=x+"px";
+noBtn.style.top=y+"px";
+});
 
 /* YES */
 
@@ -327,35 +324,14 @@ function yesClicked(){
 nextBtn.style.display="inline-block";
 }
 
-/* NO button impossible to catch */
-
-noBtn.addEventListener("mouseenter",()=>{
-let x=Math.random()*(window.innerWidth-200);
-let y=Math.random()*(window.innerHeight-200);
-noBtn.style.position="absolute";
-noBtn.style.left=x+"px";
-noBtn.style.top=y+"px";
-});
-
-/* NEXT → BEACH PAGE */
+/* NEXT PAGE */
 
 nextBtn.onclick=function(){
 document.body.style.background="none";
-collagePage.style.display="block";
+document.getElementById("mainContent").style.display="none";
+beachPage.style.display="block";
 song2.play();
 };
-
-/* Floating hearts */
-
-setInterval(()=>{
-let heart=document.createElement("div");
-heart.className="heart-bg";
-heart.innerHTML="💖";
-heart.style.left=Math.random()*100+"vw";
-heart.style.fontSize=(15+Math.random()*30)+"px";
-document.body.appendChild(heart);
-setTimeout(()=>heart.remove(),8000);
-},700);
 
 </script>
 
