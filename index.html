@@ -4,10 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For My Love 💖</title>
-<link href="https://fonts.googleapis.com/css2?family=Atma:wght@700&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Atma:wght@400&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Atma',cursive;}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Atma',cursive;
+}
 
 body{
 height:100vh;
@@ -21,7 +27,7 @@ text-align:center;
 transition:1s;
 }
 
-/* -------- LOADER -------- */
+/* ---------- LOADER ---------- */
 
 #loader{
 position:fixed;
@@ -46,14 +52,13 @@ animation:pulse 1.5s infinite;
 100%{transform:scale(1);}
 }
 
-/* -------- MAIN CONTENT -------- */
+/* ---------- MAIN CONTENT ---------- */
 
 #mainContent{
 display:none;
 flex-direction:column;
 align-items:center;
-gap:30px;
-position:relative;
+gap:25px;
 }
 
 /* IMAGE */
@@ -64,7 +69,7 @@ height:320px;
 border-radius:20px;
 overflow:hidden;
 box-shadow:0 0 25px rgba(255,77,136,0.6);
-animation:fadeIn 1s ease;
+display:none;
 }
 
 .image-box img{
@@ -76,12 +81,12 @@ object-fit:cover;
 /* SUBTITLE */
 
 .subtitle{
-font-size:clamp(24px,5vw,45px);
-font-weight:bold;
+font-size:clamp(22px,4.5vw,36px);
+font-weight:normal;
+line-height:1.6;
 max-width:90%;
 opacity:0;
-transition:opacity 0.8s;
-text-shadow:0 0 15px #ff4d88;
+transition:opacity 0.8s ease;
 }
 
 /* QUESTION */
@@ -89,7 +94,7 @@ text-shadow:0 0 15px #ff4d88;
 #questionBox{
 display:none;
 flex-direction:column;
-gap:30px;
+gap:25px;
 align-items:center;
 opacity:0;
 transition:opacity 0.8s;
@@ -129,7 +134,7 @@ background:#ff4d88;
 color:white;
 }
 
-/* -------- BEACH PAGE -------- */
+/* ---------- BEACH PAGE ---------- */
 
 #beachPage{
 display:none;
@@ -164,9 +169,14 @@ transition:transform 0.4s;
 transform:scale(1.05);
 }
 
-@keyframes fadeIn{
-from{opacity:0;}
-to{opacity:1;}
+#startBtn{
+padding:14px 35px;
+font-size:20px;
+background:#ff4d88;
+color:white;
+border:none;
+border-radius:40px;
+cursor:pointer;
 }
 
 </style>
@@ -183,14 +193,14 @@ to{opacity:1;}
 
 <button id="startBtn">Tap to Start 💖</button>
 
-<div class="image-box" id="imageBox" style="display:none;">
+<div class="image-box" id="imageBox">
 <img id="slideImg" src="">
 </div>
 
 <div class="subtitle" id="subtitle"></div>
 
 <div id="questionBox">
-<div style="font-size:clamp(26px,5vw,40px);">
+<div style="font-size:clamp(24px,5vw,38px);">
 ওরে আমার সোনা মনি বল না, "ভালোবাসি" 🌝
 </div>
 
@@ -222,7 +232,7 @@ to{opacity:1;}
 
 <script>
 
-/* -------- LOADER -------- */
+/* ---------- LOADER ---------- */
 
 window.onload=()=>{
 setTimeout(()=>{
@@ -247,45 +257,79 @@ const song2=document.getElementById("song2");
 const images=["image1.jpg","image2.jpg","image3.jpg","image4.jpg","image5.jpg"];
 let imgIndex=0;
 
-/* START */
-
 document.getElementById("startBtn").onclick=function(){
 this.style.display="none";
 imageBox.style.display="block";
 audio.play();
 };
 
-/* SUBTITLE TIMING */
+/* ---------- SUBTITLES WITH YOUR EXACT TIMESTAMPS ---------- */
+
+const subtitles = [
+{
+start:0.9,end:20,
+text:`বাঁকা ঠোঁটের মুচকি হাসি<br>
+কুন্ডলীতে ম্যাচিং রাশি<br>
+তাইতো আমি তোরই কাছে<br>
+বারে বারে আসি।`
+},
+{
+start:21,end:30,
+text:`মাইরি বলছি,<br>
+বাঁকা ঠোটের মুচকি হাসি<br>
+কুন্ডলীতে ম্যাচিং রাশি<br>
+তাইতো আমি তোরই<br>
+কাছে বারে বারে আসি।`
+},
+{
+start:31,end:42,
+text:`যখনই হয় মন উদাসী<br>
+গেয়ে উঠি ভীম পলাশী।<br>
+ঘুটঘুটে এই প্রেমপুরিতে<br>
+জ্বালিয়ে দে না বাতি।`
+},
+{
+start:43,end:51,
+text:`মিথ্যে হলে বলেই দে না, "তোকে ভালোবাসি"<br>
+ওরে আমার সোনা মনি বল না, "ভালোবাসি"`
+},
+{
+start:51,end:61,
+text:`মুচকি হেসে বলেই দে না, "তোকে ভালোবাসি"<br>
+ওরে আমার মন্টু সোনা বল না, "ভালোবাসি"`
+}
+];
+
+let currentSubtitle=-1;
 
 audio.addEventListener("timeupdate",()=>{
 let t=audio.currentTime;
 
-if(t>=5 && t<18){
-show("বাঁকা ঠোঁটের মুচকি হাসি<br>কুন্ডলীতে ম্যাচিং রাশি");
+let index=subtitles.findIndex(s=>t>=s.start&&t<=s.end);
+
+if(index!==currentSubtitle){
+subtitle.style.opacity=0;
+setTimeout(()=>{
+if(index!==-1){
+subtitle.innerHTML=subtitles[index].text;
+subtitle.style.opacity=1;
 showImage();
 }
-else if(t>=18 && t<35){
-show("তাইতো আমি তোরই কাছে<br>বারে বারে আসি");
+},300);
+currentSubtitle=index;
 }
-else if(t>=35 && t<55){
-show('মিথ্যে হলে বলেই দে না<br>"তোকে ভালোবাসি"');
-}
-else if(t>=55){
+
+if(t>61 && !audio.paused){
 fadeOutSong();
 }
 });
-
-function show(text){
-subtitle.innerHTML=text;
-subtitle.style.opacity=1;
-}
 
 function showImage(){
 slideImg.src=images[imgIndex];
 imgIndex=(imgIndex+1)%images.length;
 }
 
-/* Smooth fade out instead of sudden stop */
+/* Smooth fade out */
 
 function fadeOutSong(){
 let fade=setInterval(()=>{
@@ -300,16 +344,14 @@ showQuestion();
 },100);
 }
 
-/* QUESTION ANIMATION */
+/* Question */
 
 function showQuestion(){
 questionBox.style.display="flex";
-setTimeout(()=>{
-questionBox.style.opacity=1;
-},100);
+setTimeout(()=>{questionBox.style.opacity=1;},100);
 }
 
-/* NO BUTTON smooth movement */
+/* No button animation */
 
 noBtn.addEventListener("mouseenter",()=>{
 let x=Math.random()*(window.innerWidth-150);
@@ -318,16 +360,15 @@ noBtn.style.left=x+"px";
 noBtn.style.top=y+"px";
 });
 
-/* YES */
+/* Yes */
 
 function yesClicked(){
 nextBtn.style.display="inline-block";
 }
 
-/* NEXT PAGE */
+/* Next page */
 
 nextBtn.onclick=function(){
-document.body.style.background="none";
 document.getElementById("mainContent").style.display="none";
 beachPage.style.display="block";
 song2.play();
