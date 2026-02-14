@@ -140,7 +140,10 @@ color:white;
 display:none;
 position:fixed;
 inset:0;
-background:url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e") center/cover no-repeat;
+background:
+linear-gradient(to top, rgba(255,120,0,0.4), rgba(0,0,0,0.5)),
+url("bg.jpg") center/cover no-repeat;
+
 }
 
 .overlay{
@@ -194,7 +197,7 @@ cursor:pointer;
 <button id="startBtn">Tap to Start 💖</button>
 
 <div class="image-box" id="imageBox">
-<img id="slideImg" src="">
+<img id="slideImg" src="image1.jpg">
 </div>
 
 <div class="subtitle" id="subtitle"></div>
@@ -267,36 +270,36 @@ audio.play();
 
 const subtitles = [
 {
-start:0.9,end:20,
-text:`বাঁকা ঠোঁটের মুচকি হাসি<br>
+start:9,end:20,
+text:`বাঁকা ঠোঁটের মুচকি হাসি 🌝<br>
 কুন্ডলীতে ম্যাচিং রাশি<br>
 তাইতো আমি তোরই কাছে<br>
-বারে বারে আসি।`
+বারে বারে আসি। 😊`
 },
 {
 start:21,end:30,
 text:`মাইরি বলছি,<br>
-বাঁকা ঠোটের মুচকি হাসি<br>
+বাঁকা ঠোটের মুচকি হাসি 🌝<br>
 কুন্ডলীতে ম্যাচিং রাশি<br>
 তাইতো আমি তোরই<br>
-কাছে বারে বারে আসি।`
+কাছে বারে বারে আসি। 😊`
 },
 {
 start:31,end:42,
-text:`যখনই হয় মন উদাসী<br>
+text:`যখনই হয় মন উদাসী 😞<br>
 গেয়ে উঠি ভীম পলাশী।<br>
 ঘুটঘুটে এই প্রেমপুরিতে<br>
-জ্বালিয়ে দে না বাতি।`
+জ্বালিয়ে দে না বাতি।🕯️`
 },
 {
 start:43,end:51,
-text:`মিথ্যে হলে বলেই দে না, "তোকে ভালোবাসি"<br>
-ওরে আমার সোনা মনি বল না, "ভালোবাসি"`
+text:`মিথ্যে হলে বলেই দে না,<br>"তোকে ভালোবাসি"<br>
+ওরে আমার সোনা মনি বল না,<br>"ভালোবাসি"`
 },
 {
 start:51,end:61,
-text:`মুচকি হেসে বলেই দে না, "তোকে ভালোবাসি"<br>
-ওরে আমার মন্টু সোনা বল না, "ভালোবাসি"`
+text:`মুচকি হেসে বলেই দে না,<br>"তোকে ভালোবাসি"<br>
+ওরে আমার মন্টু সোনা বল না,<br>"ভালোবাসি"`
 }
 ];
 
