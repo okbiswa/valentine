@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For My Love 💖</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Atma:wght@400&display=swap" rel="stylesheet">
 
 <style>
@@ -26,7 +27,7 @@ text-align:center;
 transition:1s;
 }
 
-/* ---------------- LOADER ---------------- */
+/* ---------- LOADER ---------- */
 
 #loader{
 position:fixed;
@@ -51,7 +52,7 @@ animation:pulse 1.5s infinite;
 100%{transform:scale(1);}
 }
 
-/* ---------------- MAIN CONTENT ---------------- */
+/* ---------- MAIN CONTENT ---------- */
 
 #mainContent{
 display:none;
@@ -59,6 +60,8 @@ flex-direction:column;
 align-items:center;
 gap:25px;
 }
+
+/* IMAGE */
 
 .image-box{
 width:260px;
@@ -75,13 +78,18 @@ height:100%;
 object-fit:cover;
 }
 
+/* SUBTITLE */
+
 .subtitle{
 font-size:clamp(22px,4.5vw,36px);
+font-weight:normal;
 line-height:1.6;
 max-width:90%;
 opacity:0;
 transition:opacity 0.8s ease;
 }
+
+/* QUESTION */
 
 #questionBox{
 display:none;
@@ -126,91 +134,49 @@ background:#ff4d88;
 color:white;
 }
 
-/* ---------------- BEACH VALENTINE PAGE ---------------- */
+/* ---------- BEACH PAGE ---------- */
 
 #beachPage{
 display:none;
 position:fixed;
 inset:0;
-background:linear-gradient(to top, rgba(255,140,0,0.5), rgba(0,0,0,0.6)),
-url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e") center/cover no-repeat;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-color:white;
-animation:fadeIn 1.5s ease;
+background:url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e") center/cover no-repeat;
 }
 
-.valentine-title{
-font-size:clamp(28px,6vw,50px);
-margin-bottom:30px;
-text-shadow:0 0 15px rgba(255,200,150,0.8);
-}
-
-.bouquet{
-position:relative;
-width:320px;
-height:420px;
-display:flex;
-justify-content:center;
-align-items:center;
-}
-
-.photo{
-position:absolute;
-width:180px;
-height:240px;
-border-radius:20px;
-overflow:hidden;
-box-shadow:0 15px 35px rgba(0,0,0,0.5);
-background:white;
-}
-
-.photo img{
-width:100%;
+.overlay{
+background:rgba(0,0,0,0.45);
 height:100%;
-object-fit:cover;
+overflow:auto;
+padding:40px 20px;
 }
 
-.photo:nth-child(1){
-left:-100px;
-top:60px;
-transform:rotate(-15deg);
+.collage{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:25px;
 }
 
-.photo:nth-child(2){
-top:0;
-z-index:2;
+.collage img{
+width:100%;
+border-radius:20px;
+padding:8px;
+background:white;
+box-shadow:0 10px 20px rgba(0,0,0,0.5);
+transition:transform 0.4s;
 }
 
-.photo:nth-child(3){
-right:-100px;
-top:60px;
-transform:rotate(15deg);
+.collage img:hover{
+transform:scale(1.05);
 }
 
-.flowers{
-position:absolute;
-bottom:-40px;
-font-size:45px;
-}
-
-@keyframes floatPetal{
-from{transform:translateY(100vh) rotate(0deg);}
-to{transform:translateY(-10vh) rotate(360deg);}
-}
-
-.petal{
-position:absolute;
+#startBtn{
+padding:14px 35px;
 font-size:20px;
-animation:floatPetal 10s linear infinite;
-opacity:0.7;
-}
-
-@keyframes fadeIn{
-from{opacity:0;}
-to{opacity:1;}
+background:#ff4d88;
+color:white;
+border:none;
+border-radius:40px;
+cursor:pointer;
 }
 
 </style>
@@ -249,14 +215,15 @@ to{opacity:1;}
 </div>
 
 <div id="beachPage">
-<div class="valentine-title">Happy Valentine's Day 💖</div>
-
-<div class="bouquet">
-<div class="photo"><img src="image1.jpg"></div>
-<div class="photo"><img src="image2.jpg"></div>
-<div class="photo"><img src="image3.jpg"></div>
-
-<div class="flowers">🌹🌻🌹🌸🌹🌻🌹</div>
+<div class="overlay">
+<h1 style="margin-bottom:30px;">Our Beautiful Memories 💕</h1>
+<div class="collage">
+<img src="image1.jpg">
+<img src="image2.jpg">
+<img src="image3.jpg">
+<img src="image4.jpg">
+<img src="image5.jpg">
+</div>
 </div>
 </div>
 
@@ -265,7 +232,7 @@ to{opacity:1;}
 
 <script>
 
-/* LOADER */
+/* ---------- LOADER ---------- */
 
 window.onload=()=>{
 setTimeout(()=>{
@@ -287,7 +254,7 @@ const nextBtn=document.getElementById("nextBtn");
 const beachPage=document.getElementById("beachPage");
 const song2=document.getElementById("song2");
 
-const images=["image1.jpg","image2.jpg","image3.jpg"];
+const images=["image1.jpg","image2.jpg","image3.jpg","image4.jpg","image5.jpg"];
 let imgIndex=0;
 
 document.getElementById("startBtn").onclick=function(){
@@ -296,44 +263,95 @@ imageBox.style.display="block";
 audio.play();
 };
 
-/* SUBTITLES */
+/* ---------- SUBTITLES WITH YOUR EXACT TIMESTAMPS ---------- */
 
-const subtitles=[
-{start:0.9,end:20,text:`বাঁকা ঠোঁটের মুচকি হাসি<br>কুন্ডলীতে ম্যাচিং রাশি<br>তাইতো আমি তোরই কাছে<br>বারে বারে আসি।`},
-{start:21,end:30,text:`মাইরি বলছি,<br>বাঁকা ঠোটের মুচকি হাসি<br>কুন্ডলীতে ম্যাচিং রাশি<br>তাইতো আমি তোরই কাছে বারে বারে আসি।`},
-{start:31,end:42,text:`যখনই হয় মন উদাসী<br>গেয়ে উঠি ভীম পলাশী।<br>ঘুটঘুটে এই প্রেমপুরিতে জ্বালিয়ে দে না বাতি।`},
-{start:43,end:51,text:`মিথ্যে হলে বলেই দে না, "তোকে ভালোবাসি"<br>ওরে আমার সোনা মনি বল না, "ভালোবাসি"`},
-{start:51,end:61,text:`মুচকি হেসে বলেই দে না, "তোকে ভালোবাসি"<br>ওরে আমার মন্টু সোনা বল না, "ভালোবাসি"`}
+const subtitles = [
+{
+start:0.9,end:20,
+text:`বাঁকা ঠোঁটের মুচকি হাসি<br>
+কুন্ডলীতে ম্যাচিং রাশি<br>
+তাইতো আমি তোরই কাছে<br>
+বারে বারে আসি।`
+},
+{
+start:21,end:30,
+text:`মাইরি বলছি,<br>
+বাঁকা ঠোটের মুচকি হাসি<br>
+কুন্ডলীতে ম্যাচিং রাশি<br>
+তাইতো আমি তোরই<br>
+কাছে বারে বারে আসি।`
+},
+{
+start:31,end:42,
+text:`যখনই হয় মন উদাসী<br>
+গেয়ে উঠি ভীম পলাশী।<br>
+ঘুটঘুটে এই প্রেমপুরিতে<br>
+জ্বালিয়ে দে না বাতি।`
+},
+{
+start:43,end:51,
+text:`মিথ্যে হলে বলেই দে না, "তোকে ভালোবাসি"<br>
+ওরে আমার সোনা মনি বল না, "ভালোবাসি"`
+},
+{
+start:51,end:61,
+text:`মুচকি হেসে বলেই দে না, "তোকে ভালোবাসি"<br>
+ওরে আমার মন্টু সোনা বল না, "ভালোবাসি"`
+}
 ];
 
-let current=-1;
+let currentSubtitle=-1;
 
 audio.addEventListener("timeupdate",()=>{
 let t=audio.currentTime;
-let i=subtitles.findIndex(s=>t>=s.start&&t<=s.end);
 
-if(i!==current){
+let index=subtitles.findIndex(s=>t>=s.start&&t<=s.end);
+
+if(index!==currentSubtitle){
 subtitle.style.opacity=0;
 setTimeout(()=>{
-if(i!==-1){
-subtitle.innerHTML=subtitles[i].text;
+if(index!==-1){
+subtitle.innerHTML=subtitles[index].text;
 subtitle.style.opacity=1;
-slideImg.src=images[imgIndex];
-imgIndex=(imgIndex+1)%images.length;
+showImage();
 }
 },300);
-current=i;
+currentSubtitle=index;
 }
 
-if(t>61&&!audio.paused){
-audio.pause();
-subtitle.style.opacity=0;
-questionBox.style.display="flex";
-setTimeout(()=>questionBox.style.opacity=1,200);
+if(t>61 && !audio.paused){
+fadeOutSong();
 }
 });
 
-/* NO BUTTON */
+function showImage(){
+slideImg.src=images[imgIndex];
+imgIndex=(imgIndex+1)%images.length;
+}
+
+/* Smooth fade out */
+
+function fadeOutSong(){
+let fade=setInterval(()=>{
+if(audio.volume>0.05){
+audio.volume-=0.05;
+}else{
+clearInterval(fade);
+audio.pause();
+subtitle.style.opacity=0;
+showQuestion();
+}
+},100);
+}
+
+/* Question */
+
+function showQuestion(){
+questionBox.style.display="flex";
+setTimeout(()=>{questionBox.style.opacity=1;},100);
+}
+
+/* No button animation */
 
 noBtn.addEventListener("mouseenter",()=>{
 let x=Math.random()*(window.innerWidth-150);
@@ -342,31 +360,19 @@ noBtn.style.left=x+"px";
 noBtn.style.top=y+"px";
 });
 
-/* YES */
+/* Yes */
 
 function yesClicked(){
 nextBtn.style.display="inline-block";
 }
 
-/* NEXT */
+/* Next page */
 
 nextBtn.onclick=function(){
 document.getElementById("mainContent").style.display="none";
-beachPage.style.display="flex";
+beachPage.style.display="block";
 song2.play();
 };
-
-/* FLOATING PETALS */
-
-setInterval(()=>{
-let petal=document.createElement("div");
-petal.className="petal";
-petal.innerHTML="🌸";
-petal.style.left=Math.random()*100+"vw";
-petal.style.fontSize=(15+Math.random()*20)+"px";
-document.body.appendChild(petal);
-setTimeout(()=>petal.remove(),10000);
-},800);
 
 </script>
 
